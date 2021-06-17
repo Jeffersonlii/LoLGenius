@@ -18,6 +18,7 @@ LoLgenius can tell you using machine learing!
 # Dataset Gathering Method
 
 -   Dataset is gathered through the RIOT GAMES API
+-   MMR is gathered through 3rd party whatismymmr API
 
 1. Starting with an initial summoner, we insert their most recent game into our dataset
 2. We then recursively do the same for the medium ranked, the highest ranked, and the lowest ranked player within the game from step 1.
@@ -33,16 +34,9 @@ LoLgenius can tell you using machine learing!
 
 -   10 features for each champion played
 -   10 features for each players solo ranked rank
--   10 features for each players recent winrate on the champion
-
-# Number of Models
-
--   4 models are planned
-
-1. SR low Elo (iron - Silver 1)
-2. SR medium Elo (Gold 4- diamond 3)
-3. SR high Elo (diamond 2 +) Note : May not have enough data
-4. ARAM
+-   10 features for each players tilt score (based on previous winrate for the day)
+-   1 feature for result of match (W/L)
+-   1 feature for game mode
 
 # Application Archetecture
 
@@ -55,17 +49,19 @@ LoLgenius can tell you using machine learing!
 ## Backend
 
 -   Flask REST backend
--   RIOT API to gather user information (current match details)
+-   RIOT API to gather user information (current match details) : https://developer.riotgames.com/apis#
 -   Periodic scheduling : https://github.com/viniciuschiele/flask-apscheduler (for periodic rebuilding of model)
 -   SCIKIT LEARN for building the model
 -   pickle for storing / restoring models
 
 ## Datastorage
 
--   SQLite DB stores all data points, different models are trained on queries of the same database
+-   Since we only insert and bulk read from our database, we can simply use csv format
+-   this method is much more simple, as our database becomes a text file
 
 ## Deployment
 
+-   Dockerize
 -   todo
 
 # Credits
