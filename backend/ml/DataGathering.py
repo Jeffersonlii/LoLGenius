@@ -2,13 +2,16 @@ import csv
 from os import write
 from RiotAPI import RiotAPI
 import secrets
+
 STARTING_SUMMONER = 'Jefferson'
 
 
 class DataGatherer:
 
-    def __init__(self, max_depth):
+    def __init__(self, max_depth, num_of_recent_matches):
         self.max_depth = max_depth
+        self.num_of_recent_matches = num_of_recent_matches
+
         self.RiotAPI = RiotAPI(secrets.DATA_GATHERING_API_KEY)
         self.seen_matches = {}
     # main function to gather data
@@ -31,10 +34,12 @@ class DataGatherer:
                 writer, self.RiotAPI.get_summoner_info(STARTING_SUMMONER)['puuid'])
 
     # recursively gather data
+
     def _recursive_gatherer(self, writer, puuid, depth=0):
         if depth == self.max_depth:
             return
-        most_recent_matches = self.RiotAPI.get_most_recent_matches(puuid, 3)
+        most_recent_matches = self.RiotAPI.get_most_recent_matches(
+            puuid, self.num_of_recent_matches)
 
         try:
             for match in most_recent_matches:
@@ -49,7 +54,7 @@ class DataGatherer:
                     self._recursive_gatherer(writer, lowest, depth + 1)
                     self._recursive_gatherer(writer, highest, depth + 1)
         except Exception as e:
-            print('123'+e)
+            print(e)
 
     # inserts the match into the csv file, returns the lowest, middle and highest mmr player from the match
     # # maybe to improve learing, we should insert each match 2 times, 1 win 1 loss (mirrored entry)
@@ -90,6 +95,7 @@ class DataGatherer:
             row['c'+i] = partics[index]["championId"]
             row['s'+i+'r'] = mmr
             row['s'+i+'ts'] = self.RiotAPI.get_tilt_score(puuid)
+        # if the first 1-5 summoners win or not
         row['result'] = partics[0]["win"]
         row['gamemode'] = game_mode
         return (row, mmt['minpuuid'], mmt['maxpuuid'])
@@ -100,5 +106,5 @@ class DataGatherer:
         return 'ARAM' if game_mode == 'ARAM' else 'ranked'
 
 
-a = DataGatherer(5)
+a = DataGatherer(10, 5)
 a.gather_data()

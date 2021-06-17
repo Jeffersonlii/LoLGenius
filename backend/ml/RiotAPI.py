@@ -47,7 +47,7 @@ class RiotAPI():
 
     def get_tilt_score(self, puuid: str) -> int:
         tilt_score = 0
-        last_n_games = 1
+        last_n_games = 3
 
         matchIDs = self._get_url('lol/match/v5/matches/by-puuid/' +
                                  puuid+'/ids?start=0&count='+str(last_n_games), 5)

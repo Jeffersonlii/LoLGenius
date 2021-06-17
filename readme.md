@@ -14,6 +14,7 @@ LoLgenius can tell you using machine learing!
 
 -   Users can specify 10 champions, patch number, and gamemode to give direct params to the model
 -   Conduct some sort of dimensionality reduction analysis
+-   accompany each dataset/model with mmr/champion distribution graph
 
 # Dataset Gathering Method
 
@@ -32,7 +33,8 @@ LoLgenius can tell you using machine learing!
 
 # Data Dimensionality
 
--   10 features for each champion played
+-   <s>10 features for each champion played</s>
+    -   (lack of data, NN has hard time learning all the champion combinations, leading to sub 50% prediction rate)
 -   10 features for each players mmr depending on the game mode
 -   10 features for each players tilt score (based on previous winrate for the day)
 -   1 feature for result of match (W/L)
@@ -64,7 +66,19 @@ LoLgenius can tell you using machine learing!
 -   Dockerize
 -   todo
 
+# TODO
+
+-   [ ] Frontend interface
+-   [ ] backend rest api
+-   [x] data gathering
+-   [x] NN Model
+-   [ ] Automatic documentation of various models
+
 # Credits
 
 1. Zekic-Susac, Marijana & Pfeifer, Sanja & Sarlija, Natasa. (2014). A Comparison of Machine Learning Methods in a High-Dimensional Classification Problem. Business Systems Research Journal. 5. 10.2478/bsrj-2014-0021. https://www.researchgate.net/publication/276530335_A_Comparison_of_Machine_Learning_Methods_in_a_High-Dimensional_Classification_Problem
+
     - this paper greatly influenced the Neural Network chosen
+
+2. https://pbpython.com/categorical-encoding.html
+3. https://www.pluralsight.com/guides/machine-learning-neural-networks-scikit-learn
