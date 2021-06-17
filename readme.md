@@ -21,7 +21,7 @@ LoLgenius can tell you using machine learing!
 -   MMR is gathered through 3rd party whatismymmr API
 
 1. Starting with an initial summoner, we insert their most recent game into our dataset
-2. We then recursively do the same for the medium ranked, the highest ranked, and the lowest ranked player within the game from step 1.
+2. We then recursively do the same for the lowest and highest mmr players within the game from step 1.
 3. We give some sort of max depth to avoid overflow
 4. As a result, we get a dataset with diverse ranks, modes, and champions.
 
@@ -33,7 +33,7 @@ LoLgenius can tell you using machine learing!
 # Data Dimensionality
 
 -   10 features for each champion played
--   10 features for each players solo ranked rank
+-   10 features for each players mmr depending on the game mode
 -   10 features for each players tilt score (based on previous winrate for the day)
 -   1 feature for result of match (W/L)
 -   1 feature for game mode
@@ -56,7 +56,7 @@ LoLgenius can tell you using machine learing!
 
 ## Datastorage
 
--   Since we only insert and bulk read from our database, we can simply use csv format
+-   Since we only insert and bulk read from our database, we can simply use csv format (Pandas)
 -   this method is much more simple, as our database becomes a text file
 
 ## Deployment
