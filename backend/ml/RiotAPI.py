@@ -42,8 +42,8 @@ class RiotAPI():
     def get_most_recent_matches(self, puuid: str, num_of_matches):
         # https://developer.riotgames.com/apis#match-v5/GET_getMatch
         matchIDs = self._get_url('lol/match/v5/matches/by-puuid/' +
-                                 puuid+'/ids?start=0&count='+num_of_matches, 5)
-        return [self._get_url('lol/match/v5/matches/'+matchID, 5) for matchID in matchIDs]
+                                 puuid+'/ids?start=0&count='+str(num_of_matches), 5)
+        return filter(lambda x: x != None, [self._get_url('lol/match/v5/matches/'+matchID, 5) for matchID in matchIDs])
 
     def get_tilt_score(self, puuid: str) -> int:
         tilt_score = 0

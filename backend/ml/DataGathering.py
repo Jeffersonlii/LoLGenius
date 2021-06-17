@@ -28,21 +28,20 @@ class DataGatherer:
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
             self._recursive_gatherer(
-                writer, self.RiotAPI.get_summoner_info(STARTING_SUMMONER)['puuid'], 0)
+                writer, self.RiotAPI.get_summoner_info(STARTING_SUMMONER)['puuid'])
 
     # recursively gather data
-    def _recursive_gatherer(self, writer, puuid, depth):
+    def _recursive_gatherer(self, writer, puuid, depth=0):
         if depth == self.max_depth:
             return
         most_recent_matches = self.RiotAPI.get_most_recent_matches(puuid, 3)
 
         try:
             for match in most_recent_matches:
-
                 # if we already inserted this match, skip it
-                if self.seen_matches[match['metadata']["NA1_3945349042"]]:
+                if match['metadata']["matchId"] in self.seen_matches:
                     continue
-                self.seen_matches[match['metadata']["NA1_3945349042"]] = True
+                self.seen_matches[match['metadata']["matchId"]] = True
 
                 (lowest, highest) = self._insert_data_point(
                     writer, match)
@@ -50,7 +49,7 @@ class DataGatherer:
                     self._recursive_gatherer(writer, lowest, depth + 1)
                     self._recursive_gatherer(writer, highest, depth + 1)
         except Exception as e:
-            print(e)
+            print('123'+e)
 
     # inserts the match into the csv file, returns the lowest, middle and highest mmr player from the match
     # # maybe to improve learing, we should insert each match 2 times, 1 win 1 loss (mirrored entry)
