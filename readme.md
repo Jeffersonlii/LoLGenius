@@ -1,7 +1,7 @@
 # LoLgenius
 
 Will you win your LoL match? \
-LoLgenius can tell you using machine learing!
+LoLgenius can tell you using machine learning!
 
 # Features
 
