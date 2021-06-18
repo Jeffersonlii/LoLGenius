@@ -1,11 +1,17 @@
+
 import pandas as pd
 from sklearn.neural_network import MLPClassifier
 
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
 
-categorical_predictors = ['c1', 'c2', 'c3', 'c4',
+import pickle
+
+target_feature = ['result']
+categorical_predictors = ['c1', 'c2', 'c3', 'c4',  # unused
                           'c5', 'c6', 'c7', 'c8', 'c9', 'c10', 'gamemode']
+numerical_predictors = ['s6ts', 's7r', 's5ts', 's4ts', 's3ts', 's2ts', 's5r', 's8ts',
+                        's3r', 's4r', 's1r', 's2r', 's1ts', 's10r', 's8r', 's6r', 's7ts', 's10ts', 's9r', 's9ts']
 
 gamemode_label_map = {"gamemode": {"ARAM": 1, "ranked": 0}}
 
@@ -33,22 +39,16 @@ class NN():
         print(confusion_matrix(y_test, predict_test))
         print(classification_report(y_test, predict_test))
 
+        # save model into file
+        with open('backend/ml/models/NN.model', 'wb') as model_file:
+            pickle.dump(mlp, model_file)
+
     # preprocesses the data
     # 1. normalize numerical predictors
     # 2. encode numerical categorical predictors (champion id) to categorical type
     # 3. split data to test and training sets
     # the split data sets are returned
-
     def _preprocess_data(self):
-
-        target_feature = ['result']
-        # predictor_features = list(
-        #     set(list(self.df.columns))-set(target_feature))  # predictor variables
-        predictor_features = list(
-            set(list(self.df.columns))-set(target_feature) - set(categorical_predictors))  # predictor variables
-        # we normalize all numerical predictors
-        numerical_predictors = list(
-            set(predictor_features)-set(categorical_predictors))
 
         # normalize
         self.df[numerical_predictors] /= self.df[numerical_predictors].max()
@@ -59,24 +59,26 @@ class NN():
             self.df[pred] = self.df[pred].astype('category')
 
         # split data
-        X = self.df[predictor_features].values
-
+        # just using the numerical predictors
+        X = self.df[numerical_predictors].values
         y = self.df[target_feature].values
-
         X_train, X_test, y_train, y_test = train_test_split(
             X, y, test_size=0.30, random_state=40)
-        print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+        # print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
         return (X_train, X_test, y_train, y_test)
-
-
-n = NN('backend/ml/datasets/lol_data_850.csv')
-n.train_model()
 
 
 class Predictor():
     def __init__(self, model):
         self.model = model
 
-    def predict(match):
-        return True
+    def predict(self, entry):
+        df = pd.DataFrame.from_dict(entry, orient='index').T
+
+        X = df[numerical_predictors].values
+        return self.model.predict(X)[0]
+
+
+# n = NN('backend/ml/datasets/lol_data_850.csv')
+# n.train_model()

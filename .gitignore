@@ -1,3 +1,4 @@
 
 backend/ml/secrets.py
 backend/ml/secrets.py
+*.pyc

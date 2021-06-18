@@ -53,9 +53,10 @@ class RiotAPI():
                                  puuid+'/ids?start=0&count='+str(last_n_games), 5)
 
         for i, matchID in enumerate(matchIDs):
-            match_details = self._get_url(
-                'lol/match/v5/matches/'+matchID, 5)
             try:
+                match_details = self._get_url(
+                    'lol/match/v5/matches/'+matchID, 5)
+
                 for participant in match_details['info']['participants']:
                     if participant['puuid'] == puuid:
                         weight = 10 * (last_n_games + 1 - i)

@@ -1,7 +1,7 @@
 import csv
-from os import write
-from RiotAPI import RiotAPI
-import secrets
+
+from .RiotAPI import RiotAPI
+from .secrets import *
 
 STARTING_SUMMONER = 'Jefferson'
 
@@ -12,7 +12,7 @@ class DataGatherer:
         self.max_depth = max_depth
         self.num_of_recent_matches = num_of_recent_matches
 
-        self.RiotAPI = RiotAPI(secrets.DATA_GATHERING_API_KEY)
+        self.RiotAPI = RiotAPI(DATA_GATHERING_API_KEY)
         self.seen_matches = {}
     # main function to gather data
 
@@ -100,11 +100,31 @@ class DataGatherer:
         row['gamemode'] = game_mode
         return (row, mmt['minpuuid'], mmt['maxpuuid'])
 
+    def live_match_to_row(self, match):
+        partics = match["participants"]
+        game_mode = self._gamemode_translate(match["gameMode"])
+
+        row = {}
+        for index in range(0, 10):
+            i = str(index+1)
+
+            puuid = self.RiotAPI.get_summoner_info(
+                partics[index]["summonerName"])['puuid']
+            mmr = self.RiotAPI.get_summoner_mmr(
+                partics[index]["summonerName"], game_mode)
+
+            row['c'+i] = partics[index]["championId"]
+            row['s'+i+'r'] = mmr
+            row['s'+i+'ts'] = self.RiotAPI.get_tilt_score(puuid)
+        # if the first 1-5 summoners win or not
+        row['gamemode'] = game_mode
+        return row
+
     # translate between riot language and whatismymmr
     def _gamemode_translate(self, game_mode):
         # try to use ARAM mmr for aram games, else just use ranked
         return 'ARAM' if game_mode == 'ARAM' else 'ranked'
 
 
-a = DataGatherer(10, 5)
-a.gather_data()
+# a = DataGatherer(10, 5)
+# a.gather_data()

@@ -31,7 +31,7 @@ LoLgenius can tell you using machine learing!
 -   League of Legends is updated very frequently
 -   To keep data fresh and models accurate, we periodically flush our entire datamodel starting from scratch.
 
-# Data Dimensionality
+# Data Features
 
 -   <s>10 features for each champion played</s>
     -   (lack of data, NN has hard time learning all the champion combinations, leading to sub 50% prediction rate)
@@ -72,7 +72,7 @@ LoLgenius can tell you using machine learing!
 -   [ ] backend rest api
 -   [x] data gathering
 -   [x] NN Model
--   [ ] Automatic documentation of various models
+-   [ ] save previous ran models
 
 # Credits
 
