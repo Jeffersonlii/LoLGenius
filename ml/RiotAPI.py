@@ -25,7 +25,8 @@ class RiotAPI():
             print(e)
             print('riot api request error (most likely rate limited)')
             if e.response.status_code == 429:  # rate limited
-                time.sleep(60)  # wait 1 min before gathering more data
+                # time.sleep(60)  # wait 1 min before gathering more data
+                # this is blocking i think TODO
                 return self._get_url(strng, version)
             return None
 

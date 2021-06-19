@@ -40,7 +40,7 @@ class NN():
         print(classification_report(y_test, predict_test))
 
         # save model into file
-        with open('backend/ml/models/NN.model', 'wb') as model_file:
+        with open('ml/models/NN.model', 'wb') as model_file:
             pickle.dump(mlp, model_file)
 
     # preprocesses the data
@@ -80,5 +80,5 @@ class Predictor():
         return self.model.predict(X)[0]
 
 
-# n = NN('backend/ml/datasets/lol_data_850.csv')
+# n = NN('ml/datasets/lol_data_850.csv')
 # n.train_model()

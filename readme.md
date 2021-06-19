@@ -5,10 +5,8 @@ LoLgenius can tell you using machine learning!
 
 # Get Started
 
--   `pip install -r requirements`
--   `$env:FLASK_APP = "hello"`
--   `python -m flask run `
--   todo frontend build
+-   `cd frontend; npm i; npm build; cd ..`
+-   `pip install -r requirements; python -u "app.py"`
 
 # Features
 
