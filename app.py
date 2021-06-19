@@ -1,37 +1,35 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 import pickle
+import os
 
-from backend.ml.DataGathering import DataGatherer
-from backend.ml.RiotAPI import RiotAPI
-from backend.ml.secrets import *
-from backend.ml.NN import Predictor
+from ml.DataGathering import DataGatherer
+from ml.RiotAPI import RiotAPI
+from ml.secrets import *
+from ml.NN import Predictor
 
-app = Flask(__name__)
-
-predictor = None
-gatherer = None
-riotAPI = None
+app = Flask(__name__, static_folder='frontend/build')
 
 
-def instantiations():
-    # todo load in model to use
-    global predictor
-    global gatherer
-    global riotAPI
+# Serve React App
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
 
-    gatherer = DataGatherer(0, 0)
-    riotAPI = RiotAPI(API_KEY)
-
-    with open('ml/models/NN.model', 'rb') as model_file:
-        # load model from file
-        predictor = Predictor(pickle.load(model_file))
-    pass
+# -------------------------------------------------------------------------------------------
 
 
-instantiations()
+gatherer = DataGatherer(0, 0)
+riotAPI = RiotAPI(API_KEY)
+with open('ml/models/NN.model', 'rb') as model_file:
+    # load model from file
+    predictor = Predictor(pickle.load(model_file))
 
 
-@app.route('/winprob-by-summoner/<summonername>', methods=['GET'])
+@app.route('/api/winprob-by-summoner/<summonername>', methods=['GET'])
 def get_win_probability_by_summonername(summonername):
     summoner_info = riotAPI.get_summoner_info(summonername)
     if not summoner_info:
