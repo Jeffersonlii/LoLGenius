@@ -52,13 +52,14 @@ LoLgenius can tell you using machine learning!
 -   A simple React frontend
 -   Axios for requesting backend
 -   Base Web framwork for UI
+-   served over flask 
 
 ## Backend
 
 -   Flask REST backend
 -   RIOT API to gather user information (current match details) : https://developer.riotgames.com/apis#
 -   Periodic scheduling : https://github.com/viniciuschiele/flask-apscheduler (for periodic rebuilding of model)
--   SCIKIT LEARN for building the model
+-   SCIKIT LEARN for building the NN model
 -   pickle for storing / restoring models
 
 ## Datastorage
@@ -69,16 +70,16 @@ LoLgenius can tell you using machine learning!
 ## Deployment
 
 -   Dockerize
--   todo
+-   Heorku ?? 
 
 # TODO
 
--   [ ] Frontend interface
--   [ ] backend rest api
+-   [x] Frontend interface
+-   [x] backend rest api
 -   [x] data gathering
 -   [x] NN Model
 -   [ ] save previous ran models
-
+-   [ ] HTTPS
 # Credits
 
 1. Zekic-Susac, Marijana & Pfeifer, Sanja & Sarlija, Natasa. (2014). A Comparison of Machine Learning Methods in a High-Dimensional Classification Problem. Business Systems Research Journal. 5. 10.2478/bsrj-2014-0021. https://www.researchgate.net/publication/276530335_A_Comparison_of_Machine_Learning_Methods_in_a_High-Dimensional_Classification_Problem
