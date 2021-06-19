@@ -3,6 +3,13 @@
 Will you win your LoL match? \
 LoLgenius can tell you using machine learning!
 
+# Get Started
+
+-   `pip install -r requirements`
+-   `$env:FLASK_APP = "hello"`
+-   `python -m flask run `
+-   todo frontend build
+
 # Features
 
 ## Basic
