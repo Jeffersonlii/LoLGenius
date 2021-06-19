@@ -1,5 +1,7 @@
+import './dashboard.scss';
+
 function Dashboard() {
-    return <div>asdfsdf</div>;
+    return <div id="host">asdfsdf</div>;
 }
 
 export default Dashboard;
