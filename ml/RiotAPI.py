@@ -1,6 +1,5 @@
 
 import requests
-import time
 API_PATHS = {
     4: r"https://na1.api.riotgames.com/",
     5: r"https://americas.api.riotgames.com/"
