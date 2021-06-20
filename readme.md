@@ -69,7 +69,7 @@ LoLgenius can tell you using machine learning!
 
 ## Deployment
 
--   `python -m pipenv install -r requirements.txt`
+-   `python -m pipenv install -r requirements.txt` or `python -m pipenv shell`
 -   `git push heroku main`
 
 # TODO

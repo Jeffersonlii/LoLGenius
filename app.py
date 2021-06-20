@@ -10,8 +10,7 @@ from flask import Flask, send_from_directory, jsonify
 
 
 app = Flask(__name__, static_folder='frontend/build')
-CORS(app)
-
+# CORS(app) # for test
 
 # Serve React App
 
@@ -57,4 +56,4 @@ def get_win_probability_by_summonername(summonername):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, threaded=True)
+    app.run(threaded=True)
