@@ -4,8 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
 gunicorn = "*"
+pandas = "*"
+schedule = "*"
+sklearn = "*"
+Flask = "*"
+Flask-Cors = "*"
 
 [dev-packages]
 
