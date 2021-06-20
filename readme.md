@@ -52,7 +52,7 @@ LoLgenius can tell you using machine learning!
 -   A simple React frontend
 -   Axios for requesting backend
 -   Base Web framwork for UI
--   served over flask 
+-   served over flask
 
 ## Backend
 
@@ -69,8 +69,8 @@ LoLgenius can tell you using machine learning!
 
 ## Deployment
 
--   Dockerize
--   Heorku ?? 
+-   `python -m pipenv install -r requirements.txt`
+-   `git push heroku main`
 
 # TODO
 
@@ -80,6 +80,7 @@ LoLgenius can tell you using machine learning!
 -   [x] NN Model
 -   [ ] save previous ran models
 -   [ ] HTTPS
+
 # Credits
 
 1. Zekic-Susac, Marijana & Pfeifer, Sanja & Sarlija, Natasa. (2014). A Comparison of Machine Learning Methods in a High-Dimensional Classification Problem. Business Systems Research Journal. 5. 10.2478/bsrj-2014-0021. https://www.researchgate.net/publication/276530335_A_Comparison_of_Machine_Learning_Methods_in_a_High-Dimensional_Classification_Problem

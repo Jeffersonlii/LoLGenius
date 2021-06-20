@@ -10,6 +10,7 @@ schedule = "*"
 sklearn = "*"
 Flask = "*"
 Flask-Cors = "*"
+requests = "*"
 
 [dev-packages]
 
