@@ -1,4 +1,5 @@
 pandas
+wheel
 flask
 schedule
 flask-cors
