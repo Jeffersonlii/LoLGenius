@@ -24,3 +24,10 @@
 #result-area {
     display: flex;
 }
+#socials {
+    display: flex;
+    justify-content: space-evenly;
+    .social {
+        margin: 0 1rem;
+    }
+}

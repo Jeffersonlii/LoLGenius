@@ -83,6 +83,36 @@ function Dashboard() {
                 )}
             </section>
             <footer>
+                <div id="socials">
+                    <a
+                        href="https://jeffersonli.dev/"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        More
+                    </a>
+                    <a
+                        href="https://www.linkedin.com/in/jeffersonlii/"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        LinkedIn
+                    </a>
+                    <a
+                        href="https://github.com/Jeffersonlii"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        GitHub
+                    </a>
+                    <a
+                        href="https://github.com/Jeffersonlii/LoLGenius"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        Source Code
+                    </a>
+                </div>
                 ©{new Date().getFullYear()} Jefferson Li. All rights reserved.
             </footer>
         </div>
