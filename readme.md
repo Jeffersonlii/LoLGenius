@@ -8,19 +8,6 @@ LoLgenius can tell you using machine learning!
 -   `cd frontend; npm i; npm build; cd ..`
 -   `pip install -r requirements; python -u "app.py"`
 
-# Features
-
-## Basic
-
--   Users can enter a username, the model runs through the current game of the user and gives
-    a predicted result (W/L)
-
-## Future
-
--   Users can specify 10 champions, patch number, and gamemode to give direct params to the model
--   Conduct some sort of dimensionality reduction analysis
--   accompany each dataset/model with mmr/champion distribution graph
-
 # Dataset Gathering Method
 
 -   Dataset is gathered through the RIOT GAMES API
@@ -30,11 +17,6 @@ LoLgenius can tell you using machine learning!
 2. We then recursively do the same for the lowest and highest mmr players within the game from step 1.
 3. We give some sort of max depth to avoid overflow
 4. As a result, we get a dataset with diverse ranks, modes, and champions.
-
-# Keeping Data Fresh
-
--   League of Legends is updated very frequently
--   To keep data fresh and models accurate, we periodically flush our entire datamodel starting from scratch.
 
 # Data Features
 
@@ -58,7 +40,6 @@ LoLgenius can tell you using machine learning!
 
 -   Flask REST backend
 -   RIOT API to gather user information (current match details) : https://developer.riotgames.com/apis#
--   Periodic scheduling : https://github.com/viniciuschiele/flask-apscheduler (for periodic rebuilding of model)
 -   SCIKIT LEARN for building the NN model
 -   pickle for storing / restoring models
 
@@ -69,8 +50,10 @@ LoLgenius can tell you using machine learning!
 
 ## Deployment
 
--   `python -m pipenv install -r requirements.txt` or `python -m pipenv shell`
--   `git push heroku main`
+-   `python -m pipenv install -r requirements.txt` or `python -m pipenv shell` create pipenv
+-   `cd frontend; npm i; npm build; cd ..`
+-   make sure frontend build is up to date commit changes and push
+-   `git push heroku main` push current branch (main) to heroku
 
 # TODO
 
@@ -79,7 +62,8 @@ LoLgenius can tell you using machine learning!
 -   [x] data gathering
 -   [x] NN Model
 -   [ ] save previous ran models
--   [ ] HTTPS
+-   [x] HTTPS
+-   [x] deploy
 
 # Credits
 
