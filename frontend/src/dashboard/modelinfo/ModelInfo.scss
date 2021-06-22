@@ -9,3 +9,8 @@
         min-width: 40rem;
     }
 }
+@media only screen and (max-width: 800px) {
+    #mi-host div {
+        min-width: 100%;
+    }
+}
