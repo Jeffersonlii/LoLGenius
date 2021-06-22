@@ -1,0 +1,11 @@
+#mi-host {
+    display: flex;
+
+    justify-content: space-evenly;
+
+    flex-wrap: wrap;
+    div {
+        width: 50%;
+        min-width: 40rem;
+    }
+}

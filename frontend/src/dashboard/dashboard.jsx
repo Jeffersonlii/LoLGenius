@@ -6,11 +6,14 @@ import { ListItem, ListItemLabel } from 'baseui/list';
 import ChevronRight from 'baseui/icon/chevron-right';
 import axios from 'axios';
 import { Spinner } from 'baseui/spinner';
+import { Drawer, ANCHOR } from 'baseui/drawer';
 
+import ModelInfo from './modelinfo/ModelInfo';
 function Dashboard() {
     const [value, setValue] = React.useState('');
     const [loading, setLoading] = React.useState(false);
     const [result, setResult] = React.useState(undefined);
+    const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
     return (
         <div id="host">
@@ -59,28 +62,40 @@ function Dashboard() {
                 {result &&
                     (result.error ? (
                         <Input value={result.msg} error />
+                    ) : result.win ? (
+                        <Input value={'Win! 🙂'} positive />
                     ) : (
-                        <Input
-                            value={result.win ? 'Win! 🙂' : 'Loss 🙃'}
-                            positive
-                        />
+                        <Input value={'Loss 🙃'} error />
                     ))}
             </section>
 
             <section id="desc-area">
                 Enter your League of Legends summoner name and LoLGenius predict
                 the outcome of your current game! (NA Only)
-                {['Powered by machine learning!', '73% accurate!'].map(
-                    (text) => {
-                        return (
-                            <ListItem
-                                artwork={(props) => <ChevronRight {...props} />}
-                            >
-                                <ListItemLabel>{text}</ListItemLabel>
-                            </ListItem>
-                        );
-                    }
-                )}
+                {[
+                    <>
+                        Powered by{' '}
+                        <a
+                            href="blah doesnt matter"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setIsDrawerOpen(true);
+                            }}
+                        >
+                            machine learning
+                        </a>
+                        !
+                    </>,
+                    '73% accurate!',
+                ].map((content) => {
+                    return (
+                        <ListItem
+                            artwork={(props) => <ChevronRight {...props} />}
+                        >
+                            <ListItemLabel>{content}</ListItemLabel>
+                        </ListItem>
+                    );
+                })}
             </section>
             <footer>
                 <div id="socials">
@@ -115,6 +130,16 @@ function Dashboard() {
                 </div>
                 ©{new Date().getFullYear()} Jefferson Li. All rights reserved.
             </footer>
+            <Drawer
+                isOpen={isDrawerOpen}
+                autoFocus
+                onClose={() => setIsDrawerOpen(false)}
+                anchor={ANCHOR.bottom}
+                showBackdrop={false}
+                size={'auto'}
+            >
+                <ModelInfo></ModelInfo>
+            </Drawer>
         </div>
     );
 }

@@ -80,5 +80,5 @@ class Predictor():
         return self.model.predict(X)[0]
 
 
-# n = NN('ml/datasets/lol_data_850.csv')
-# n.train_model()
+n = NN('ml/datasets/lol_data_850.csv')
+n.train_model()
