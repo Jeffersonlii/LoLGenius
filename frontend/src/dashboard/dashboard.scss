@@ -31,3 +31,19 @@
         margin: 0 1rem;
     }
 }
+
+#message {
+    position: absolute;
+    top: 0;
+    width: calc(100% - 2rem);
+    background-color: yellow;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .del-icon {
+        cursor: pointer;
+        display: flex;
+    }
+}

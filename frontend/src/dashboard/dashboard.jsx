@@ -7,13 +7,15 @@ import ChevronRight from 'baseui/icon/chevron-right';
 import axios from 'axios';
 import { Spinner } from 'baseui/spinner';
 import { Drawer, ANCHOR } from 'baseui/drawer';
-
+import Delete from 'baseui/icon/delete';
 import ModelInfo from './modelinfo/ModelInfo';
+
 function Dashboard() {
     const [value, setValue] = React.useState('');
     const [loading, setLoading] = React.useState(false);
     const [result, setResult] = React.useState(undefined);
     const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+    const [isNotifVisible, setIsNotifVisible] = React.useState(true);
 
     return (
         <div id="host">
@@ -140,6 +142,30 @@ function Dashboard() {
             >
                 <ModelInfo></ModelInfo>
             </Drawer>
+            {isNotifVisible && (
+                <div id="message">
+                    <p>
+                        Currently not working, waiting for Riot to approve a
+                        production API key &nbsp;&nbsp;
+                        <a
+                            href="https://developer.riotgames.com/docs/portal#product-registration_application-process"
+                            target="_blank"
+                            rel="noreferrer"
+                            s
+                        >
+                            More Info
+                        </a>
+                    </p>
+                    <div
+                        class="del-icon"
+                        onClick={() => {
+                            setIsNotifVisible(false);
+                        }}
+                    >
+                        <Delete size={32}></Delete>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
