@@ -51,7 +51,7 @@ LoLgenius can tell you using machine learning!
 ## Deployment
 
 -   `python -m pipenv install -r requirements.txt` or `python -m pipenv shell` create pipenv
--   `cd frontend; npm i; npm build; cd ..`
+-   `cd frontend; npm i; npm run build; cd ..`
 -   make sure frontend build is up to date commit changes and push
 -   `git push heroku main` push current branch (main) to heroku
 

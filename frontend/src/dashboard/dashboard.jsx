@@ -15,7 +15,7 @@ function Dashboard() {
     const [loading, setLoading] = React.useState(false);
     const [result, setResult] = React.useState(undefined);
     const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
-    const [isNotifVisible, setIsNotifVisible] = React.useState(true);
+    const [isNotifVisible, setIsNotifVisible] = React.useState(false); // "currently not working" header, ddisable it since riot approved the app
 
     return (
         <div id="host">
