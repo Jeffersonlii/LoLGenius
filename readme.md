@@ -50,6 +50,7 @@ LoLgenius can tell you using machine learning!
 
 ## Deployment
 
+-   use `cmd`
 -   `python -m pipenv install -r requirements.txt` or `python -m pipenv shell` create pipenv
 -   `cd frontend; npm i; npm run build; cd ..`
 -   make sure frontend build is up to date commit changes and push
